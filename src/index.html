@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - JSPM</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <app></app>
+
+    <script src="../node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script>
+        System.import('./bootstrap.ts');
+    </script>
+</body>
+
+</html>
