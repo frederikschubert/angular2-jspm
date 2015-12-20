@@ -3,13 +3,7 @@ System.config({
   defaultJSExtensions: true,
   transpiler: false,
   typescriptOptions: {
-    "module": "system",
-    "noImplicitAny": true,
-    "typeCheck": true,
-    "tsconfig": false,
-    "sourceMap": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+      "tsconfig": false
   },
   paths: {
     "npm:*": "jspm_packages/npm/*",

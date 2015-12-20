@@ -39,7 +39,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('libs', function () {
-    gulp.src(['jspm_packages/npm/zone.js@0.5.10/dist/zone.min.js'])
+    gulp.src(['node_modules/angular2/bundles/angular2-polyfills.min.js', 'node_modules/es6-shim/es6-shim.min.js'])
         .pipe(gulp.dest(global.paths.www + '/lib'));
 });
 
