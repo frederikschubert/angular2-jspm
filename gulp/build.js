@@ -10,7 +10,14 @@ var htmlReplace = require('gulp-html-replace'),
     spawn = require('child_process').spawn;
 
 gulp.task('build:html', function () {
-    gulp.src(global.paths.src + global.paths.html)
+    gulp.src([global.paths.src + global.paths.html, '!' + global.paths.src + '/index.*'])
+        .pipe(minifyHtml({collapseWhitespace: true}))
+        .pipe(gulp.dest(global.paths.www))
+        .on('error', function (error) {
+            console.error('html error: ' + error);
+        });
+    gulp.src(global.paths.src + '/index.prod.html')
+        .pipe(rename('index.html'))
         .pipe(minifyHtml({collapseWhitespace: true}))
         .pipe(gulp.dest(global.paths.www))
         .on('error', function (error) {
