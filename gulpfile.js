@@ -3,7 +3,8 @@ var connect = require('gulp-connect'),
     gulp = require('gulp'),
     requireDir = require('require-dir'),
     chokidar = require('chokidar'),
-    hotLoader = require('angular2-hot-loader');
+    hotLoader = require('angular2-hot-loader'),
+    runSequence = require('run-sequence');
 
 global.paths = {
     server: '',
@@ -28,18 +29,19 @@ gulp.task('connect', function () {
     });
     hotLoader.listen({
         port: 4412,
-        projectRoot: __dirname
+        projectRoot: __dirname,
+        processPath: (file) => file.replace(__dirname, "")
     });
     connect.server({ root: global.paths.server, livereload: true });
 });
 
 // clean out www folder
 gulp.task('clean', function () {
-    del([global.paths.www]);
+    return del([global.paths.www]);
 });
 
 gulp.task('libs', function () {
-    gulp.src(['node_modules/angular2/bundles/angular2-polyfills.min.js', 'node_modules/es6-shim/es6-shim.min.js'])
+    return gulp.src(['node_modules/angular2/bundles/angular2-polyfills.min.js', 'node_modules/es6-shim/es6-shim.min.js'])
         .pipe(gulp.dest(global.paths.www + '/lib'));
 });
 
@@ -52,6 +54,17 @@ gulp.task('watch', function () {
 });
 
 // shortcut tasks
-gulp.task('default', ['clean', 'libs', 'compile', 'watch', 'connect']);
-gulp.task('compile', ['compile:css', 'compile:html', 'compile:img', 'compile:ts']);
-gulp.task('build', ['clean', 'libs', 'compile:css', 'build:html', 'build:img', 'build:ts']);
+gulp.task('default', function(callback) {
+  runSequence('clean', ['libs', 'compile'], 'watch', 'connect');
+  callback();
+});
+
+gulp.task('compile', function(callback) {
+  runSequence(['compile:css', 'compile:html', 'compile:img', 'compile:ts']);
+  callback();
+});
+
+gulp.task('build', function(callback) {
+  runSequence('clean', ['libs', 'compile:css', 'build:html', 'build:img', 'build:ts']);
+  callback();
+});

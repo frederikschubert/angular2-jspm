@@ -5,10 +5,14 @@ import {ShowCase} from "./components/showCase/showCase";
 	selector: "app",
 	directives: [ShowCase],
 	template: `
-	<h1>Angular2 - Test</h1>
+	<h1>Angular2</h1>
 	<showcase></showcase>
 	`
 })
 export class App {
+
+    ngOnInit() {
+        console.log("App");
+    }
 
 }

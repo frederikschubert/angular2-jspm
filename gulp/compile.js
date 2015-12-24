@@ -6,7 +6,7 @@ var autoprefixer = require('gulp-autoprefixer'),
     cache = require('gulp-cached');
 
 gulp.task('compile:css', function () {
-    gulp.src(global.paths.src + global.paths.scss)
+    return gulp.src(global.paths.src + global.paths.scss)
         .pipe(cache('css'))
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
@@ -17,20 +17,20 @@ gulp.task('compile:css', function () {
 });
 
 gulp.task('compile:html', function () {
-    gulp.src(global.paths.src + global.paths.html)
+    return gulp.src(global.paths.src + global.paths.html)
         .pipe(cache('html'))
         .pipe(gulp.dest(global.paths.www));
 });
 
 gulp.task('compile:img', function () {
-    gulp.src(global.paths.src + global.paths.img)
+    return gulp.src(global.paths.src + global.paths.img)
         .pipe(cache('img'))
         .pipe(gulp.dest(global.paths.www))
         .pipe(connect.reload());
 });
 
 gulp.task('compile:ts', function () {
-    gulp.src(global.paths.src + global.paths.ts)
+    return gulp.src(global.paths.src + global.paths.ts)
         .pipe(cache('ts'))
         .pipe(gulp.dest(global.paths.www));
 });

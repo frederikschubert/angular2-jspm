@@ -3,10 +3,12 @@ import {Home} from "../home/home";
 import {Detail} from "../detail/detail";
 
 @Component({
-	selector: "showcase",
-	directives: [Home,Detail],
-	templateUrl: "app/components/showCase/showCase.html"
+    selector: "showcase",
+    directives: [Home, Detail],
+    templateUrl: "app/components/showCase/showCase.html",
+    styleUrls: ["app/components/showCase/style.css"]
 })
 export class ShowCase {
+
 
 }

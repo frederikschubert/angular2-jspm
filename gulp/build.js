@@ -3,7 +3,7 @@ var htmlReplace = require('gulp-html-replace'),
     jspm = require('gulp-jspm'),
     gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
-    minifyHtml = require('gulp-minify-html'),
+    minifyHtml = require('gulp-htmlmin'),
     pngquant = require('imagemin-pngquant'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
@@ -11,7 +11,7 @@ var htmlReplace = require('gulp-html-replace'),
 
 gulp.task('build:html', function () {
     gulp.src(global.paths.src + global.paths.html)
-        .pipe(minifyHtml())
+        .pipe(minifyHtml({collapseWhitespace: true}))
         .pipe(gulp.dest(global.paths.www))
         .on('error', function (error) {
             console.error('html error: ' + error);

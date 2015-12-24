@@ -1,14 +1,22 @@
 import {Component} from "angular2/core";
-import {Detail} from "../detail/detail";
 
 @Component({
 	selector: "home",
-	directives: [Detail],
 	template: `
-		<h3>Home</h3>
-		<detail></detail>
+		<h3 (click)="click()">Home</h3>
+        {{clicks}}
 	`
 })
 export class Home {
+    
+    clicks = 11;
+    
+    ngOnInit() {
+        console.log("Home");
+    }
+    
+    click() {
+        this.clicks++;
+    }
 	
 }
