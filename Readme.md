@@ -13,11 +13,9 @@ npm install -g jspm
 ## Commands
 
 ```bash
-# STILL BUGGY
 # Start development server on port 8080, serve application in www folder and enable hot reloading
 npm start 
 
-# NOT WORKING YET
 # Bundle files for production
 npm run build
 ```
