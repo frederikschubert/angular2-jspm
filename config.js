@@ -3,7 +3,7 @@ System.config({
   defaultJSExtensions: true,
   transpiler: false,
   typescriptOptions: {
-      "tsconfig": false
+    "tsconfig": false
   },
   paths: {
     "npm:*": "jspm_packages/npm/*",

@@ -31,7 +31,8 @@
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "systemjs": "^0.19.9",
-    "typescript": "^1.7.5"
+    "typescript": "^1.7.5",
+    "es6-shim": "^0.34.0"
   },
   "jspm": {
     "dependencies": {
@@ -48,8 +49,5 @@
       "ts": "github:frankwallis/plugin-typescript@^2.4.3",
       "typescript": "npm:typescript@^1.7.5"
     }
-  },
-  "dependencies": {
-    "es6-shim": "^0.34.0"
   }
 }

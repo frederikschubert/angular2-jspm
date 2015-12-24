@@ -1,13 +1,13 @@
 var htmlReplace = require('gulp-html-replace'),
     imagemin = require('gulp-imagemin'),
-    jspm = require('gulp-jspm'),
     gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     minifyHtml = require('gulp-htmlmin'),
     pngquant = require('imagemin-pngquant'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    inject = require('gulp-inject');
+    inject = require('gulp-inject'),
+    spawn = require('child_process').spawn;
 
 gulp.task('build:html', function () {
     gulp.src(global.paths.src + global.paths.html)
@@ -32,12 +32,5 @@ gulp.task('build:img', function () {
 });
 
 gulp.task('build:ts', function () {
-    gulp.src(global.paths.src  + global.paths.ts)
-        .pipe(jspm({selfExecutingBundle: true}))
-        .pipe(uglify())
-        .pipe(rename('bundle.min.js'))
-        .pipe(gulp.dest(global.paths.www))
-        .on('error', function (error) {
-            console.error('js error: ' + error);
-        });
+    spawn('jspm', ['bundle-sfx', 'src', 'www/bundle.sfx.js', '--minify'])
 });
