@@ -11,14 +11,14 @@ var htmlReplace = require('gulp-html-replace'),
 
 gulp.task('build:html', function () {
     gulp.src([global.paths.src + global.paths.html, '!' + global.paths.src + '/index.*'])
-        .pipe(minifyHtml({collapseWhitespace: true}))
+        .pipe(minifyHtml({ collapseWhitespace: true }))
         .pipe(gulp.dest(global.paths.www))
         .on('error', function (error) {
             console.error('html error: ' + error);
         });
     gulp.src(global.paths.src + '/index.prod.html')
         .pipe(rename('index.html'))
-        .pipe(minifyHtml({collapseWhitespace: true}))
+        .pipe(minifyHtml({ collapseWhitespace: true }))
         .pipe(gulp.dest(global.paths.www))
         .on('error', function (error) {
             console.error('html error: ' + error);
@@ -29,7 +29,7 @@ gulp.task('build:img', function () {
     gulp.src(global.paths.src + global.paths.img)
         .pipe(imagemin({
             progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
+            svgoPlugins: [{ removeViewBox: false }],
             use: [pngquant()]
         }))
         .pipe(gulp.dest(global.paths.www))
@@ -39,5 +39,8 @@ gulp.task('build:img', function () {
 });
 
 gulp.task('build:ts', function () {
-    spawn('jspm', ['bundle-sfx', 'src', 'www/bundle.sfx.js', '--minify'])
+    var jspm = spawn('jspm', ['bundle-sfx', 'src', 'www/bundle.sfx.js', '--minify']);
+    jspm.stderr.on('data', function (data) {
+        console.log('stderr: ' + data);
+    });
 });

@@ -4,7 +4,8 @@ var connect = require('gulp-connect'),
     requireDir = require('require-dir'),
     chokidar = require('chokidar'),
     hotLoader = require('angular2-hot-loader'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    dependencies = require('./dependencies');
 
 global.paths = {
     server: '',
@@ -23,14 +24,15 @@ requireDir('gulp');
 // run server
 gulp.task('connect', function () {
     chokidar.watch(['./www/**/*.ts', './www/**/*.html', './www/**/*.css']).on('all', function (event, path) {
-        var fullPath = __dirname + '/' + path;
-        console.log(event, fullPath);
-        hotLoader.onChange([fullPath]);
+        console.log(event, path);
+        if (event === 'change' || event == 'add') {
+            hotLoader.onChange([path]);
+        }
     });
     hotLoader.listen({
         port: 4412,
         projectRoot: __dirname,
-        processPath: (file) => file.replace(__dirname, "")
+        processPath: (file) => file
     });
     connect.server({ root: global.paths.server, livereload: true });
 });
@@ -40,9 +42,14 @@ gulp.task('clean', function () {
     return del([global.paths.www]);
 });
 
-gulp.task('libs', function () {
-    return gulp.src(['node_modules/angular2/bundles/angular2-polyfills.min.js', 'node_modules/es6-shim/es6-shim.min.js', 'node_modules/es6-shim/es6-shim.map'])
+gulp.task('libs', ['fonts'], function () {
+    return gulp.src(dependencies.libs)
         .pipe(gulp.dest(global.paths.www + '/lib'));
+});
+
+gulp.task('fonts', function () {
+    return gulp.src(dependencies.fonts)
+        .pipe(gulp.dest(global.paths.www + '/fonts'));
 });
 
 // watch for file changes
@@ -54,17 +61,17 @@ gulp.task('watch', function () {
 });
 
 // shortcut tasks
-gulp.task('default', function(callback) {
-  runSequence('clean', ['libs', 'compile'], 'watch', 'connect');
-  callback();
+gulp.task('default', function (callback) {
+    runSequence('clean', ['libs', 'compile'], 'watch', 'connect');
+    callback();
 });
 
-gulp.task('compile', function(callback) {
-  runSequence(['compile:css', 'compile:html', 'compile:img', 'compile:ts']);
-  callback();
+gulp.task('compile', function (callback) {
+    runSequence(['compile:css', 'compile:html', 'compile:img', 'compile:ts']);
+    callback();
 });
 
-gulp.task('build', function(callback) {
-  runSequence('clean', ['libs', 'compile:css', 'build:html', 'build:img', 'build:ts']);
-  callback();
+gulp.task('build', function (callback) {
+    runSequence('clean', ['libs', 'compile:css', 'build:html', 'build:img', 'build:ts']);
+    callback();
 });

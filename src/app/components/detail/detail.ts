@@ -1,8 +1,7 @@
-import {Component, ViewEncapsulation} from "angular2/core";
+import {Component} from "angular2/core";
 
 @Component({
 	selector: "detail",
-	encapsulation: ViewEncapsulation.Emulated,
     inputs: ["test"],
 	template: `
 		<h4>{{test}}</h4>
@@ -12,12 +11,11 @@ import {Component, ViewEncapsulation} from "angular2/core";
 	`
 })
 export class Detail {
-    
+
     clicks = 10;
-    test:string;
     
     ngOnInit() {
-        this.clicks = 100;
+        this.clicks = 10;
     }
 
 }
