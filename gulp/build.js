@@ -1,12 +1,7 @@
-var htmlReplace = require('gulp-html-replace'),
-    imagemin = require('gulp-imagemin'),
+var imagemin = require('gulp-imagemin'),
     gulp = require('gulp'),
-    minifyCss = require('gulp-minify-css'),
-    minifyHtml = require('gulp-htmlmin'),
     pngquant = require('imagemin-pngquant'),
     rename = require('gulp-rename'),
-    uglify = require('gulp-uglify'),
-    inject = require('gulp-inject'),
     spawn = require('child_process').spawn;
 
 gulp.task('build:html', function () {
