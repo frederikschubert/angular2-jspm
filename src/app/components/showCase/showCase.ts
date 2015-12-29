@@ -11,5 +11,11 @@ import {Detail} from "../detail/detail";
 })
 export class ShowCase {
 
+    title = "ShowCase";
+
+    ngOnInit() {
+        this.title = "ShowCase";
+    }
+
 
 }

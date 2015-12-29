@@ -3,8 +3,8 @@ System.config({
   defaultJSExtensions: true,
   transpiler: false,
   typescriptOptions: {
-    "tsconfig": false,
-    "module": "commonjs"
+    "module": "commonjs",
+    "inlineSourceMap": true
   },
   paths: {
     "npm:*": "jspm_packages/npm/*",

@@ -15,7 +15,7 @@ export class Detail {
     clicks = 10;
     
     ngOnInit() {
-        this.clicks = 10;
+        this.clicks = 1000;
     }
 
 }

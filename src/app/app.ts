@@ -5,7 +5,7 @@ import {ShowCase} from "./components/showCase/showCase";
 	selector: "app",
 	directives: [ShowCase],
 	template: `
-	<h1>Angular2</h1>
+	<h1>Angular2 - JSPM</h1>
 	<showcase></showcase>
 	`
 })
