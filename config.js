@@ -4,7 +4,8 @@ System.config({
   transpiler: false,
   typescriptOptions: {
     "module": "commonjs",
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "emitDecoratorMetadata": true
   },
   paths: {
     "npm:*": "jspm_packages/npm/*",
