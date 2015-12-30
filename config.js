@@ -29,12 +29,6 @@ System.config({
           "loader": "ts"
         }
       }
-    },
-    "angular2": {
-      "defaultExtension": "js"
-    },
-    "rxjs": {
-      "defaultExtension": "js"
     }
   },
 

@@ -8,6 +8,9 @@ Angular 2 is a npm dev-dependency for code completion.
 ```bash
 npm install -g gulp
 npm install -g jspm
+
+npm install
+jspm install
 ```
 
 ## Commands
