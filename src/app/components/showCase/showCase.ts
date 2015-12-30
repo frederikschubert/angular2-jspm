@@ -4,10 +4,9 @@ import {Detail} from "../detail/detail";
 
 @Component({
     selector: "showcase",
-    moduleId: module.id,
     directives: [Home, Detail],
-    templateUrl: "showCase.html",
-    styleUrls: ["style.css"]
+    templateUrl: "app/components/showCase/showCase.html",
+    styleUrls: ["app/components/showCase/style.css"]
 })
 export class ShowCase {
 
