@@ -5,9 +5,6 @@ import {Detail} from "../detail/detail";
 	selector: "home",
     directives: [Detail],
 	template: `
-		<h3 (click)="click()">Home</h3>
-        {{clicks}}
-        <detail></detail>
         <i class="fa fa-bluetooth"></i>
 	`
 })

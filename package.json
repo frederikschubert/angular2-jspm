@@ -5,7 +5,8 @@
   "main": "config.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+    "docs": "typedoc --options typedoc.json  src/**/*.ts"
   },
   "author": "Frederik Schubert",
   "private": true,
@@ -28,6 +29,7 @@
     "run-sequence": "^1.1.5",
     "rxjs": "^5.0.0-beta.0",
     "systemjs": "^0.19.9",
+    "typedoc": "^0.3.12",
     "typescript": "^1.7.5"
   },
   "jspm": {
