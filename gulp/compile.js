@@ -6,18 +6,18 @@ var autoprefixer = require('gulp-autoprefixer'),
     cache = require('gulp-cached');
 
 gulp.task('compile:css', function () {
-    gulp.src([global.paths.src + global.paths.scss, '!src/style.scss'])
+    gulp.src(['src/**/*.scss', '!src/style.scss'])
         .pipe(cache('css'))
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
-        .pipe(gulp.dest(global.paths.www))
+        .pipe(gulp.dest('www'))
         .on('error', function (error) {
             console.error('css error: ' + error);
         });
-    gulp.src(global.paths.src + '/style.scss')
+    gulp.src('src/style.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
-        .pipe(gulp.dest(global.paths.www))
+        .pipe(gulp.dest('www'))
         .pipe(connect.reload())
         .on('error', function (error) {
             console.error('css error: ' + error);
@@ -25,20 +25,20 @@ gulp.task('compile:css', function () {
 });
 
 gulp.task('compile:html', function () {
-    gulp.src([global.paths.src + global.paths.html, '!' + global.paths.src + '/index.prod.html'])
+    gulp.src(['src/**/*.html', '!src/index.prod.html'])
         .pipe(cache('html'))
-        .pipe(gulp.dest(global.paths.www));
+        .pipe(gulp.dest('www'));
 });
 
 gulp.task('compile:img', function () {
-    gulp.src(global.paths.src + global.paths.img)
+    gulp.src('src/**/*.{png,jpg}')
         .pipe(cache('img'))
-        .pipe(gulp.dest(global.paths.www))
+        .pipe(gulp.dest('www'))
         .pipe(connect.reload());
 });
 
 gulp.task('compile:ts', function () {
-    gulp.src([global.paths.src + global.paths.ts, '!src/bootstrap.prod.ts'])
+    gulp.src(['src/**/*.ts', '!src/bootstrap.prod.ts'])
         .pipe(cache('ts'))
-        .pipe(gulp.dest(global.paths.www));
+        .pipe(gulp.dest('www'));
 });

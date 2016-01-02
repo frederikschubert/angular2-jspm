@@ -7,23 +7,12 @@ var connect = require('gulp-connect'),
     runSequence = require('run-sequence'),
     dependencies = require('./dependencies');
 
-global.paths = {
-    server: '',
-    src: 'src',
-    www: 'www',
-    css: '/**/*.css',
-    html: '/**/*.html',
-    img: '/**/*.{jpg,png}',
-    ts: '/**/*.ts',
-    scss: '/**/*.scss'
-};
-
 // include sub-tasks from folder
 requireDir('gulp');
 
 // run server
 gulp.task('connect', function () {
-    chokidar.watch(['./www/**/*.ts', './www/**/*.html', './www/**/*.css']).on('all', function (event, path) {
+    chokidar.watch(['www/**/*.ts', 'www/**/*.html', 'www/**/*.css']).on('all', function (event, path) {
         console.log(event, path);
         if (event === 'change' || event == 'add') {
             hotLoader.onChange([path]);
@@ -34,30 +23,30 @@ gulp.task('connect', function () {
         projectRoot: __dirname,
         processPath: (file) => file
     });
-    connect.server({ root: global.paths.server, livereload: true });
+    connect.server({ root: '', livereload: true });
 });
 
 // clean out www folder
 gulp.task('clean', function () {
-    return del([global.paths.www]);
+    return del('www');
 });
 
 gulp.task('libs', ['fonts'], function () {
     return gulp.src(dependencies.libs)
-        .pipe(gulp.dest(global.paths.www + '/lib'));
+        .pipe(gulp.dest('www/lib'));
 });
 
 gulp.task('fonts', function () {
     return gulp.src(dependencies.fonts)
-        .pipe(gulp.dest(global.paths.www + '/fonts'));
+        .pipe(gulp.dest('www/fonts'));
 });
 
 // watch for file changes
 gulp.task('watch', function () {
-    gulp.watch([global.paths.src + global.paths.html], ['compile:html']);
-    gulp.watch([global.paths.src + global.paths.img], ['compile:img']);
-    gulp.watch([global.paths.src + global.paths.scss], ['compile:css']);
-    gulp.watch([global.paths.src + global.paths.ts], ['compile:ts']);
+    gulp.watch('src/**/*.html', ['compile:html']);
+    gulp.watch('src/**/*.{png,jpg}', ['compile:img']);
+    gulp.watch('src/**/*.scss', ['compile:css']);
+    gulp.watch('src/**/*.ts', ['compile:ts']);
 });
 
 // shortcut tasks

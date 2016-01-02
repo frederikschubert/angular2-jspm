@@ -5,27 +5,27 @@ var imagemin = require('gulp-imagemin'),
     spawn = require('child_process').spawn;
 
 gulp.task('build:html', function () {
-    gulp.src([global.paths.src + global.paths.html, '!' + global.paths.src + '/index.*'])
-        .pipe(gulp.dest(global.paths.www))
+    gulp.src(['src/**/*.html', '!src/index.*'])
+        .pipe(gulp.dest('www'))
         .on('error', function (error) {
             console.error('html error: ' + error);
         });
-    gulp.src(global.paths.src + '/index.prod.html')
+    gulp.src('src/index.prod.html')
         .pipe(rename('index.html'))
-        .pipe(gulp.dest(global.paths.www))
+        .pipe(gulp.dest('www'))
         .on('error', function (error) {
             console.error('html error: ' + error);
         });
 });
 
 gulp.task('build:img', function () {
-    gulp.src(global.paths.src + global.paths.img)
+    gulp.src('src/**/*.{png,jpg}')
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{ removeViewBox: false }],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(global.paths.www))
+        .pipe(gulp.dest('www'))
         .on('error', function (error) {
             console.error('img error: ' + error);
         });
@@ -33,7 +33,10 @@ gulp.task('build:img', function () {
 
 gulp.task('build:ts', function () {
     var jspm = spawn('jspm', ['bundle-sfx', 'src', 'www/bundle.sfx.js', '--minify']);
+    jspm.stdout.on('data', function (data) {
+        console.log('ts: ' + data);
+    });
     jspm.stderr.on('data', function (data) {
-        console.log('stderr: ' + data);
+        console.log('ts error: ' + data);
     });
 });
